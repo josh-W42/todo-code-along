@@ -12,7 +12,9 @@ export default function TodosContainer(){
             setTodos(res.data)
         }
         fetchData()
-    })
+    }, [])
+    
+
     return (
         <div className='todosContainer'>
             <Todos todos={todos} />
