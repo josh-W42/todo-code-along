@@ -7,6 +7,11 @@ const endPoint = `https://sei-111-todo-backend.herokuapp.com/todos`;
 // router.get('/', (req, res)=> {
 //}
 
+
+//router.delete('/:id', res, res)=> {
+  //
+//}
+
 // define a regular class
 class TodoModel {
     // is define a method to get all todos
@@ -18,6 +23,10 @@ class TodoModel {
     static create = (todo) => {
         // post request sending the todo object as the second argument
         let request = axios.post(endPoint, todo)
+        return request
+    }
+    static delete = (todo) => {
+        let request = axios.delete(`${endPoint}/${todo._id}`)
         return request
     }
     // methods to update delete etc.

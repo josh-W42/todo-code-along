@@ -17,6 +17,7 @@ export default function TodosContainer(){
     }, [])
 
     const createTodo = async(todo) => {
+        console.log(todo)
         let newTodo = {
             body: todo,
             completed: false
@@ -28,12 +29,24 @@ export default function TodosContainer(){
         setTodos([...todos, anotherTodo.data])
     }
 
+    const deleteTodo = async(todo)=> {
+        console.log(todo)
+        // talk to database
+        const deletedTodo = await TodoModel.delete(todo)
+        // filter is going to check and remove the todo with the id that was passed in
+        let tempTodos = [...todos].filter((eachTodo)=> {
+            return eachTodo._id !== deletedTodo.data._id
+        })
+        //we will have to update state
+        setTodos(tempTodos)
+    }
+
 
 
     return (
         <div className='todosContainer'>
             <CreateTodoForm createTodo={createTodo} />
-            <Todos todos={todos} />
+            <Todos todos={todos}  deleteTodo={deleteTodo} />
             <h1>TodosContainer</h1>
         </div>
     );
